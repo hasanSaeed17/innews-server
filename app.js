@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: ['http://localhost:4200', 'https://innews.netlify.app'],
+  origin: ['http://localhost:4200', process.env.FRONTEND_URL],
   credentials: true
 }));
 
