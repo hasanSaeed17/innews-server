@@ -10,10 +10,27 @@ require('dotenv').config();
 // Signup
 exports.signup = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const hashed = await bcrypt.hash(password, 12);
+    const { adminEmail , userEmail, userPassword } = req.body;
 
-    const user = await User.create({ email, password: hashed });
+    // const isFound = await User.findOne({ email: adminEmail });
+    // if (!isFound) return res.status(403).json({ message: 'Only admin can create users' });
+
+    const hashed = await bcrypt.hash(userPassword, 12);
+
+    const user = await User.create({ email: userEmail, password: hashed });
+    res.status(201).json({ message: 'User created', userId: user._id });
+  } catch (err) {
+    res.status(400).json({ message: 'Error creating user', error: err.message });
+  }
+};
+
+exports.recoverySignupDeveloper = async (req, res) => {
+  try {
+    const { userEmail, userPassword } = req.body;
+
+    const hashed = await bcrypt.hash(userPassword, 12);
+
+    const user = await User.create({ email: userEmail, password: hashed });
     res.status(201).json({ message: 'User created', userId: user._id });
   } catch (err) {
     res.status(400).json({ message: 'Error creating user', error: err.message });
