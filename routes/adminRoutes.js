@@ -5,7 +5,8 @@ const router = express.Router();
 
 
 const authMiddleware = require('../middleware/auth.middleware');
-router.get('/', authMiddleware, (req, res) => {
+
+router.get('/',  (req, res) => {
   res.json({ message: 'Welcome Admin', userId: req.userId });
 });
 
