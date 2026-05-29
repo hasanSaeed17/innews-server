@@ -13,7 +13,7 @@ router.post('/reset-password/:token', authController.resetPassword);
 
 
 // Protected Example (Admin)
-router.get('/admin', authMiddleware, (req, res) => {
+router.get('/admin',  (req, res) => {
   res.json({ message: 'Welcome Admin' });
 });
 
